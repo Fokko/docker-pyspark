@@ -2,7 +2,10 @@ FROM python
 
 MAINTAINER Fokko Driesprong <fokkodriesprong@godatadriven.com>
 
-RUN apt-get update \
+
+
+RUN update-ca-certificates -f \
+  && apt-get update \
   && apt-get upgrade -y \
   && apt-get install -y \
     wget \
@@ -39,5 +42,9 @@ RUN mkdir -p /usr/spark/work/ \
 ENV SPARK_MASTER_PORT 7077
 
 RUN pip install --upgrade pip
+
+RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
+  && chmod 0755 ./bin/sbt \
+  && ./bin/sbt -v -211 -sbt-create about
 
 CMD /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master
