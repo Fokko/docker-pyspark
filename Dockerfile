@@ -2,8 +2,6 @@ FROM python
 
 MAINTAINER Fokko Driesprong <fokkodriesprong@godatadriven.com>
 
-
-
 RUN update-ca-certificates -f \
   && apt-get update \
   && apt-get upgrade -y \
@@ -41,10 +39,13 @@ RUN mkdir -p /usr/spark/work/ \
 
 ENV SPARK_MASTER_PORT 7077
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip \
+  && pip install pylint --quiet
 
 RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
   && chmod 0755 ./bin/sbt \
   && ./bin/sbt -v -211 -sbt-create about
+
+
 
 CMD /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master
