@@ -40,7 +40,7 @@ RUN mkdir -p /usr/spark/work/ \
 ENV SPARK_MASTER_PORT 7077
 
 RUN pip install --upgrade pip \
-  && pip install pylint --quiet
+  && pip install pylint coverage --quiet
 
 RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
   && chmod 0755 ./bin/sbt \
