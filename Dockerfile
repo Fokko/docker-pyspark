@@ -26,10 +26,10 @@ RUN cd /opt/ \
 
 # SPARK
 RUN cd /usr/ \
-  && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.1-bin-hadoop2.6.tgz \
-  && tar xzf spark-1.6.1-bin-hadoop2.6.tgz \
-  && rm spark-1.6.1-bin-hadoop2.6.tgz \
-  && mv spark-1.6.1-bin-hadoop2.6 spark
+  && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.3-bin-hadoop2.6.tgz \
+  && tar xzf spark-1.6.3-bin-hadoop2.6.tgz \
+  && rm spark-1.6.3-bin-hadoop2.6.tgz \
+  && mv spark-1.6.3-bin-hadoop2.6 spark
 
 ENV SPARK_HOME /usr/spark
 ENV PYTHONPATH $SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.9-src.zip
@@ -45,7 +45,5 @@ RUN pip install --upgrade pip \
 RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
   && chmod 0755 ./bin/sbt \
   && ./bin/sbt -v -211 -sbt-create about
-
-
 
 CMD /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master
