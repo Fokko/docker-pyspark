@@ -1,4 +1,4 @@
-FROM python
+FROM python:3.5
 
 MAINTAINER Fokko Driesprong <fokkodriesprong@godatadriven.com>
 
@@ -26,14 +26,14 @@ RUN cd /opt/ \
 
 # SPARK
 RUN cd /usr/ \
-  && wget http://d3kbcqa49mib13.cloudfront.net/spark-2.0.2-bin-hadoop2.6.tgz \
-  && tar xzf spark-2.0.2-bin-hadoop2.6.tgz \
-  && rm spark-2.0.2-bin-hadoop2.6.tgz \
-  && mv spark-2.0.2-bin-hadoop2.6 spark
+  && wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz \
+  && tar xzf spark-2.1.0-bin-hadoop2.7.tgz \
+  && rm spark-2.1.0-bin-hadoop2.7.tgz \
+  && mv spark-2.1.0-bin-hadoop2.7 spark
 
-ENV SPARK_HOME /usr/spark/
+ENV SPARK_HOME /usr/spark
 ENV SPARK_MAJOR_VERSION 2
-ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.3-src.zip:$SPARK_HOME/python/:$PYTHONPATH
+ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$SPARK_HOME/python/:$PYTHONPATH
 
 RUN mkdir -p /usr/spark/work/ \
   && chmod -R 777 /usr/spark/work/
