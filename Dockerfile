@@ -2,9 +2,6 @@ FROM openjdk:8
 
 MAINTAINER Fokko Driesprong <fokkodriesprong@godatadriven.com>
 
-
-RUN     java-1.8.0-openjdk \
-
 RUN update-ca-certificates -f \
   && apt-get update \
   && apt-get upgrade -y \
