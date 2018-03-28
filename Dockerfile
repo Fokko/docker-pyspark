@@ -11,6 +11,7 @@ RUN update-ca-certificates -f \
     git \
     libatlas3-base \
     libopenblas-base \
+    libatlas-base-dev \
   && apt-get clean \
   && git config --global http.sslverify false
 
