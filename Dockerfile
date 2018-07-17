@@ -13,21 +13,20 @@ RUN update-ca-certificates -f \
     libopenblas-base \
     libatlas-base-dev \
     build-essential \
-  && apt-get clean \
-  && git config --global http.sslverify false
+  && apt-get clean
 
 ENV GIT_SSL_NO_VERIFY=false
 
 # Spark
 RUN cd /usr/ \
-  && wget "http://apache.mirrors.spacedump.net/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz" \
-  && tar xzf spark-2.2.0-bin-hadoop2.7.tgz \
-  && rm spark-2.2.0-bin-hadoop2.7.tgz \
-  && mv spark-2.2.0-bin-hadoop2.7 spark
+  && wget "http://ftp.tudelft.nl/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz" \
+  && tar xzf spark-2.3.1-bin-hadoop2.7.tgz \
+  && rm spark-2.3.1-bin-hadoop2.7.tgz \
+  && mv spark-2.3.1-bin-hadoop2.7 spark
 
 ENV SPARK_HOME /usr/spark
 ENV SPARK_MAJOR_VERSION 2
-ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.4-src.zip:$SPARK_HOME/python/:$PYTHONPATH
+ENV PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip:$SPARK_HOME/python/:$PYTHONPATH
 
 RUN mkdir -p /usr/spark/work/ \
   && chmod -R 777 /usr/spark/work/
@@ -48,5 +47,7 @@ RUN pip install --upgrade pip \
 RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
   && chmod 0755 ./bin/sbt \
   && ./bin/sbt -v -211 -sbt-create about
+
+ENV PATH=$PATH:$SPARK_HOME/bin/
 
 CMD /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master
