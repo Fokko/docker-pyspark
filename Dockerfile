@@ -17,10 +17,10 @@ RUN update-ca-certificates -f \
 
 # Spark
 RUN cd /usr/ \
-  && wget "http://ftp.tudelft.nl/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz" \
-  && tar xzf spark-2.3.1-bin-hadoop2.7.tgz \
-  && rm spark-2.3.1-bin-hadoop2.7.tgz \
-  && mv spark-2.3.1-bin-hadoop2.7 spark
+  && wget "http://ftp.tudelft.nl/apache/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz" \
+  && tar xzf spark-2.4.3-bin-hadoop2.7.tgz \
+  && rm spark-2.4.3-bin-hadoop2.7.tgz \
+  && mv spark-2.4.3-bin-hadoop2.7 spark
 
 ENV SPARK_HOME /usr/spark
 ENV SPARK_MAJOR_VERSION 2
