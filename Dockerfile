@@ -36,7 +36,8 @@ ENV CONDA_DIR /opt/miniconda
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
     chmod a+x miniconda.sh && \
     ./miniconda.sh -b -p $CONDA_DIR && \
-    rm ./miniconda.sh
+    rm ./miniconda.sh && \
+    conda install python=3.6
 ENV PATH="$CONDA_DIR/bin/":$PATH
 
 RUN pip install --upgrade pip \
