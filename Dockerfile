@@ -15,8 +15,6 @@ RUN update-ca-certificates -f \
     build-essential \
   && apt-get clean
 
-ENV GIT_SSL_NO_VERIFY=false
-
 # Spark
 RUN cd /usr/ \
   && wget "http://ftp.tudelft.nl/apache/spark/spark-2.3.1/spark-2.3.1-bin-hadoop2.7.tgz" \
@@ -42,7 +40,7 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -
 ENV PATH="$CONDA_DIR/bin/":$PATH
 
 RUN pip install --upgrade pip \
-  && pip install pylint coverage pytest --quiet
+  && pip install pylint coverage pytest black --quiet
 
 RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
   && chmod 0755 ./bin/sbt \
