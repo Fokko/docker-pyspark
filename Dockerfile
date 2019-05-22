@@ -42,10 +42,6 @@ ENV PATH="$CONDA_DIR/bin/":$PATH
 RUN pip install --upgrade pip \
   && pip install pylint coverage pytest black --quiet
 
-RUN wget -O ./bin/sbt https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt \
-  && chmod 0755 ./bin/sbt \
-  && ./bin/sbt -v -211 -sbt-create about
-
 ENV PATH=$PATH:$SPARK_HOME/bin/
 
 CMD /usr/spark/bin/spark-class org.apache.spark.deploy.master.Master
